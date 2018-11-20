@@ -1,6 +1,7 @@
 {
     "version": 2,
     "name": "toolbox",
+    "alias": "toolbox-tdvorak.now.sh",
     "builds": [
       { "src": "*.js", "use": "@now/node" }
     ]
