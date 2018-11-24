@@ -56,6 +56,9 @@ module.exports = (req, res) => {
         .then(parseCsv)
         .then(JSON.stringify)
         .then(data => {
+            res.setHeader('Access-Control-Allow-Origin', '*');
+            res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE'); // If needed
+            res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type'); // If needed
             res.statusCode = 200;
             res.setHeader('Content-Type', 'application/json; charset=utf-8');
             res.end(data);
