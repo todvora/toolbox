@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "npm test"
+    "test": "npm test",
+    "devel": "./node_modules/nodemon/bin/nodemon.js test/server.js"
   },
   "repository": {
     "type": "git",
@@ -18,5 +19,8 @@
   "homepage": "https://github.com/todvora/toolbox#readme",
   "devDependencies": {
     "nodemon": "^1.18.6"
+  },
+  "dependencies": {
+    "iconv-lite": "^0.4.24",
   }
 }
