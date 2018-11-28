@@ -35,7 +35,7 @@ const parseCsv = function (text) {
         const param = line[1];
         const time = line[2];
         const value = line[3].trim();
-        if (place !== '' && value !== '?' && value !== '-' && value !== 'Dfue') { // ignore unknown values
+        if (place !== '' && value !== '?' && value !== '-' && value !== 'Dfue' & value !== 'F') { // ignore unknown values
             if (acc[place] == null) {
                 acc[place] = {}
             }
