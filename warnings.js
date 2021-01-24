@@ -1,5 +1,5 @@
 const http = require('https');
-const iconv = require('iconv-lite');
+var parseString = require('xml2js').parseString;
 
 const getContent = function (url) {
     // return new pending promise
@@ -13,7 +13,7 @@ const getContent = function (url) {
             // temporary data holder
             const body = [];
             // on every content chunk, push it to the data array
-            response.on('data', (chunk) => body.push(iconv.decode(chunk, "ISO-8859-1")));
+            response.on('data', (chunk) => body.push(chunk));
             // we are done, resolve promise with those joined chunks
             response.on('end', () => resolve(body.join('')));
         });
@@ -22,38 +22,25 @@ const getContent = function (url) {
     })
 };
 
-const parseCsv = function (text) {
-    const lines = text.split(/\r?\n/)
-        .map(line => line.split(';'));
-    const headers = lines[0];
-    return lines.slice(1).reduce((acc, line) => {
-        if(line.length < 4) {
-            return acc;
-        }
-        // Messort	Parameter	Zeitpunkt	HMW
-        const place = line[0].replace(/\s\s+/g, ' ').trim();
-        const param = line[1];
-        const time = line[2];
-        const value = line[3].trim();
-        if (place !== '' && value !== '?' && value !== '-' && value !== 'Dfue' & value !== 'F') { // ignore unknown values
-            if (acc[place] == null) {
-                acc[place] = {}
-            }
+const parseRss = function (text) {
+    return new Promise((resolve, reject) => {
 
-            if (acc[place][param] == null) {
-                acc[place][param] = {};
+        const options = {
+            explicitArray: false
+        };
+        parseString(text, options, function (err, result) {
+            if (err) {
+                reject(e);
             }
-
-            acc[place][param][time] = value;
-        }
-        return acc;
-    }, {});
+            resolve(result);
+        });
+    });
 };
 
 
 module.exports = (req, res) => {
-    getContent('https://www.salzburg.gv.at/ogd/bad388c1-e13f-484d-ba51-331a79537f5f/meteorologie-aktuell.csv')
-        .then(parseCsv)
+    getContent('https://meteoalarm.eu/documents/rss/at.rss')
+        .then(parseRss)
         .then(JSON.stringify)
         .then(data => {
             res.setHeader('Access-Control-Allow-Origin', '*');
