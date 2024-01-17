@@ -23,6 +23,7 @@
   },
   "dependencies": {
     "iconv-lite": "^0.4.24",
+    "next.js": "^1.0.3",
     "xml2js": "^0.4.19"
   }
 }
