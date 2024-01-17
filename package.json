@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "packageManager": "npm@10.3.0",
   "scripts": {
     "test": "npm test",
     "devel": "./node_modules/nodemon/bin/nodemon.js test/server.js"
