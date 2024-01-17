@@ -1,29 +1,16 @@
 {
-  "name": "toolbox",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "packageManager": "npm@10.3.0",
+  "name": "hello-world",
+  "version": "0.1.0",
+  "private": true,
   "scripts": {
-    "test": "npm test",
-    "devel": "./node_modules/nodemon/bin/nodemon.js test/server.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/todvora/toolbox.git"
-  },
-  "author": "Tomas Dvorak <todvora@gmail.com> (http://www.tomas-dvorak.cz/)",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/todvora/toolbox/issues"
-  },
-  "homepage": "https://github.com/todvora/toolbox#readme",
-  "devDependencies": {
-    "nodemon": "^1.18.6"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
   },
   "dependencies": {
-    "iconv-lite": "^0.4.24",
-    "next.js": "^1.0.3",
-    "xml2js": "^0.4.19"
+    "react": "^18",
+    "react-dom": "^18",
+    "next": "14.0.4"
   }
 }

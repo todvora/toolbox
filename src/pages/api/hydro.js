@@ -1,3 +1,5 @@
+// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
+
 const http = require('https');
 
 const getContent = function (url) {
@@ -21,20 +23,19 @@ const getContent = function (url) {
     })
 };
 
-
-module.exports = (req, res) => {
-    getContent('https://info.ktn.gv.at/asp/hydro/daten/json/station/2002176.json')
-        .then(data => {
-            res.setHeader('Access-Control-Allow-Origin', '*');
-            res.setHeader('Access-Control-Allow-Methods', 'GET');
-            res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
-            res.statusCode = 200;
-            res.setHeader('Content-Type', 'application/json; charset=utf-8');
-            res.end(data);
-        })
-        .catch(err => {
-            res.statusCode = 500;
-            res.setHeader('Content-Type', 'text/plain');
-            res.end(err.toString());
-        });
-};
+export default function handler(req, res) {
+   getContent('https://info.ktn.gv.at/asp/hydro/daten/json/station/2002176.json')
+          .then(data => {
+              res.setHeader('Access-Control-Allow-Origin', '*');
+              res.setHeader('Access-Control-Allow-Methods', 'GET');
+              res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+              res.statusCode = 200;
+              res.setHeader('Content-Type', 'application/json; charset=utf-8');
+              res.end(data);
+          })
+          .catch(err => {
+              res.statusCode = 500;
+              res.setHeader('Content-Type', 'text/plain');
+              res.end(err.toString());
+          });
+}
